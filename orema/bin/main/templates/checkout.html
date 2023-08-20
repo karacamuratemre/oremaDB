@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>Checkout</title>
+</head>
+
+<body>
+
+	<h1>Product Details</h1>
+	<div th:if="${product != null}">
+		<p th:text="${product.name}"></p>
+		<p th:text="${product.price}"></p>
+		<!-- Display other product details as needed -->
+	</div>
+	<div th:unless="${product != null}">
+		<p>Product not found.</p>
+	</div>
+	<br></br>
+	<br></br>
+	<h1>Checkout Form</h1>
+	<form th:action="@{/process}" method="post">
+		<label for="name">Product Name:</label>		
+		<input type="text" id="productName" name="productName" th:value="${product.name}" readonly><br><br>
+		
+		<label for="name">Product Price:</label>		
+		<input type="text" id="productPrice" name="productPrice" th:value="${product.price}" readonly><br><br>
+		
+		<label for="name">Name:</label>
+		<input type="text" id="name" name="name" required><br><br>
+
+		<label for="address">Address:</label>
+		<textarea id="address" name="address" rows="4" cols="50" required></textarea><br><br>
+
+		<label for="shippingOption">Shipping Option:</label>
+		<select id="shippingOption" name="shippingOption">
+			<option value="free">Free Standard</option>
+			<option value="express">Express (10 EUR)</option>
+		</select><br><br>
+		<!-- ... existing form fields ... -->
+		<label for="cardNumber">Card Number:</label>
+		<input type="text" id="cardNumber" name="cardNumber" required><br><br>
+
+		<label for="expiration">Expiration Date:</label>
+		<input type="text" id="expiration" name="expiration" placeholder="MM/YY" required><br><br>
+
+		<label for="cvv">CVV:</label>
+		<input type="text" id="cvv" name="cvv" required><br><br>
+		<button type="submit">Complete Purchase</button>
+	</form>
+</body>
+
+</html>
